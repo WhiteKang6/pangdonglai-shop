@@ -1,0 +1,28 @@
+server:
+  port: 8082
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=shop1;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: 520925865
+  application:
+    name: pangdonglai-shop
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.database.homework.pangdonglaishop.entity
+  configuration:
+    map-underscore-to-camel-case: true # 开启下划线映射驼峰命名
+
+
+pagehelper:
+  helper-dialect: sqlserver
+  reasonable: true
+  support-methods-arguments: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+  api-docs:
+    path: /v3/api-docs
+

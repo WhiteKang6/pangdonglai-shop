@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.database.homework.pangdonglaishop.mapper.ProductMapper">
+
+
+    <update id="update">
+        update product
+        <set>
+            <if test="name!=null"> name=#{name},</if>
+            <if test="price!=null"> price=#{price},</if>
+            <if test="stock!=null"> stock=#{stock},</if>
+            <if test="categoryId!=null"> category_id=#{categoryId},</if>
+            <if test="status!=null"> status=#{status},</if>
+            <if test="imageUrl!=null"> image_url=#{imageUrl},</if>
+        </set>
+        where id=#{id}
+    </update>
+    <select id="selectPage" resultType="com.database.homework.pangdonglaishop.VO.ProductVO">
+        select p.*, c.name as category_name from product p left join category c on p.category_id=c.id
+        <where>
+            <if test="keyword!=null">and p.name like concat('%',#{keyword},'%')</if>
+            <if test="categoryId!=null">and p.category_id=#{categoryId}</if>
+            <if test="status!=null">and p.status=#{status}</if>
+        </where>
+        order by p.id
+    </select>
+</mapper>
